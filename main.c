@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/17 04:23:53 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/17 04:29:37 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	**malloc_soluce(int size)
 
 int		pose_piece(t_tetriminos *tetri, char **soluce, t_coord pos)
 {
+	// TODO : check si je peux poser la piece tetrisur spluce a l'endroit pos
 	return 1;
 }
 
