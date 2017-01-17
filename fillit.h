@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:01:15 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/11 18:10:05 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/17 01:00:45 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ typedef struct			s_tetriminos
 	t_coord				bc[4];
 	struct s_tetriminos *next;
 }						t_tetriminos;
+
+int ft_strlen(char *str);
 
 #endif

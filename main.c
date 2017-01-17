@@ -6,33 +6,66 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/11 18:18:51 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/17 01:02:42 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	free_soluce(char ***soluce)
+int		find_soluce(int size, t_tetriminos *tetri, char ***soluce)
 {
-// TODO : Free le tableau de solution
+	
+	return (1);
 }
 
-char	**ft_resolve(t_tetriminos tetri)
+void	free_soluce(char **soluce, int size)
 {
-	int				sizemap;
-	char			**soluce;
+	int i;
 
-	sizemap = 4;
-	if (!tetri)
-		return (NULL);
-	soluce = (char**)malloc(sizeof(char*) * (sizemap + 1));
+	i = 0;
+	while (i < size)
+	{
+		free(soluce[i]);
+		i++;
+	}
+	free(soluce);
+}
+
+char	**malloc_soluce(int size)
+{
+	char **soluce;
+	int i;
+
+	i = 0;
+	soluce = (char**)malloc(sizeof(char*) * (size + 1));
 	if (soluce == NULL)
 		return (NULL);
+	while (i < size)
+	{
+		soluce[i] = (char*)malloc(sizeof(char) * size + 1);
+		if (soluce[i] == NULL)
+			return (NULL);
+		soluce[i][size] = 0;
+		i++;
+	}
+	soluce[size] = 0;
+	return (soluce);
+}
+
+char	**ft_resolve(t_tetriminos *tetri)
+{
+	char	**soluce;
+	int sizemap;
+
+	sizemap = 3;
+	if (!tetri)
+		return (NULL);
+	soluce = malloc_soluce(sizemap);
 	while (find_soluce(sizemap, tetri, &soluce) == 0)
 	{
+		free_soluce(soluce, sizemap);
 		sizemap++;
-		free_soluce(&soluce);
-		soluce = (char**)malloc(sizeof(char*) * (sizemap + 1));
+		soluce = malloc_soluce(sizemap);
 		if (soluce == NULL)
 			return (NULL);
 	}
@@ -41,14 +74,25 @@ char	**ft_resolve(t_tetriminos tetri)
 
 void	ft_print_result(char **soluce)
 {
+	int i;
+	int j;
+
 	if (!soluce)
 		return ;
-// TODO: afficher tableau Zer
+	i = 0;
+	while (soluce[i])
+	{
+		write(1, soluce[i], ft_strlen(soluce[i]));
+		write(1, "\n", 1);
+		i++;
+	}
 }
+
+
 
 int main()
 {
-	t_tetriminos	tetri;
+	t_tetriminos	*tetri;
 
 	ft_print_result(ft_resolve(tetri));
 	return (0);
