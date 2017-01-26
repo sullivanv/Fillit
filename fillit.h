@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:01:15 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/17 01:00:45 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/26 01:53:38 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+
+// debu
+#include <stdio.h>
+
+
 
 typedef struct			s_coord
 {
