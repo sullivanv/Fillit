@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/27 16:34:33 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/27 16:52:26 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,8 @@ char		**pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 		pos.x++;
 		posTetri.x++;
 	}
-	ft_print_result(soluce);
-	printf("piece -> %d\n", piecepose);
+//	ft_print_result(soluce);
+//	printf("piece -> %d\n", piecepose);
 //	sleep(1);
 	if (piecepose != 4)
 	{
@@ -196,7 +196,7 @@ int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 		*soluce = pose_piece(tetri, *soluce, pos, size);
 		if (tetri->next)
 		{
-			printf("la prochaine piece a test est %c\n", tetri->next->id);
+//			printf("la prochaine piece a test est %c\n", tetri->next->id);
 			newpos.x = 0;
 			newpos.y = 0;
 			test_piece(newpos, tetri->next, soluce, size);
@@ -208,7 +208,7 @@ int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 			exit(1);
 		}
 	}
-	printf("\nJe retest la piece %c avec cette position %d, %d\n", tetri->id, pos.x, pos.y);
+//	printf("\nJe retest la piece %c avec cette position %d, %d\n", tetri->id, pos.x, pos.y);
 	if (pos.y + 1 == size)
 	{
 		pos.y = 0;
@@ -220,7 +220,7 @@ int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 		return (0);
 	else
 	{
-		printf("recursive\n");
+//		printf("recursive\n");
 //		printf("\nJe retest la piece b avec une auter position %d, %d\n", pos.x, pos.y);
 		test_piece(pos, tetri, soluce, size);
 	}
@@ -249,7 +249,7 @@ char	**ft_resolve(t_tetriminos *tetri)
 
 	pos.x = 0;
 	pos.y = 0;
-	sizemap = 4; // mettre a 2
+	sizemap = 2; // mettre a 2
 	if (!tetri)
 		return (NULL);
 	while (find_soluce(sizemap, &tetri, tetri, pos) == NULL)
