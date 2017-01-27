@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/27 13:48:59 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:36:12 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char **ft_copy_tab(char **solucebase, int size)
 
 /* Algo */
 
-int		pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
+char		**pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 {
 	// TODO : check si je peux poser la piece tetri sur soluce a l'endroit pos
 	int nbpos;
@@ -110,8 +110,9 @@ int		pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 	posTetri.x = 0;
 	posTetri.y = 0;
 	piecepose = 0;
+	pos = posTetri;
 //	ft_print_result(soluce);
-	printf("\nLa piece %c, est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, pos.x, pos.y);
+//	printf("\nLa piece %c, est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, pos.x, pos.y);
 	while (pos.x < posBase.x + 4 && pos.x < size)
 	{
 		while (pos.y < posBase.y + 4 && pos.y < size)
@@ -119,26 +120,26 @@ int		pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 			countPiece = 0;
 			while (countPiece < 4)
 			{
-				printf("\nLa piece %c, partie %d de coordonnes x:%d et y:%d est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, tetri->bc[countPiece].y, pos.x, pos.y);
-				if (tetri->id == 'B')
-				{
+//				printf("\nLa piece %c, partie %d de coordonnes x:%d et y:%d est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, tetri->bc[countPiece].y, pos.x, pos.y);
+//				if (tetri->id == 'B')
+//				{
 //					printf("\nLa piece %c, partie %d de coordonnes x:%d et y:%d est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, countPiece, tetri->bc[countPiece].x, tetri->bc[countPiece].y, pos.x, pos.y);
 //					sleep(1);
-				}
+//				}
 				if (soluce[pos.x][pos.y] && soluce[pos.x][pos.y] == '0' && tetri->bc[countPiece].x == posTetri.x - posBase.x && tetri->bc[countPiece].y == posTetri.y - posBase.y)
 				{
 					//					if (tetri->id == 'B')
-					printf("La piece %c, parti %d, est pose car (tetri->bc[countPiece].x) = %d donc egale a posTetri.x - posBase.x= %d - %d. (POur info pos.x = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, posTetri.x, posBase.x, pos.x);
-					printf("La piece %c, parti %d, est pose car (tetri->bc[countPiece].y) = %d donc egale a posTetri.y - posBase.y= %d - %d. (POur info pos.y = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].y, posTetri.y, posBase.y, pos.y);
-					printf("piece pose++");
+//					printf("La piece %c, parti %d, est pose car (tetri->bc[countPiece].x) = %d donc egale a posTetri.x - posBase.x= %d - %d. (POur info pos.x = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, posTetri.x, posBase.x, pos.x);
+//					printf("La piece %c, parti %d, est pose car (tetri->bc[countPiece].y) = %d donc egale a posTetri.y - posBase.y= %d - %d. (POur info pos.y = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].y, posTetri.y, posBase.y, pos.y);
+//					printf("piece pose++");
 					soluce[pos.x][pos.y] = tetri->id;
 					piecepose++;
 				}
-				else
-				{
-					printf("La piece %c, parti %d, nes pas pose car tetri->bc[countPiece].x= %d donc pas egale a posTetri.x - posBase.x = %d - %d. (POur info pos.x = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, posBase.x, posTetri.x, pos.x);
-					printf("La piece %c, parti %d, nes pas pose car tetri->bc[countPiece].y= %d donc pas egale a posTetri.y - posBase.y = %d - %d. (POur info pos.y = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].y, posBase.y, posTetri.y, pos.y);
-				}
+//				else
+//				{
+//					printf("La piece %c, parti %d, nes pas pose car tetri->bc[countPiece].x= %d donc pas egale a posTetri.x - posBase.x = %d - %d. (POur info pos.x = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, posBase.x, posTetri.x, pos.x);
+//					printf("La piece %c, parti %d, nes pas pose car tetri->bc[countPiece].y= %d donc pas egale a posTetri.y - posBase.y = %d - %d. (POur info pos.y = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].y, posBase.y, posTetri.y, pos.y);
+//				}
 				countPiece++;
 			}
 			pos.y++;
@@ -151,24 +152,25 @@ int		pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 	}
 	ft_print_result(soluce);
 	printf("piece -> %d\n", piecepose);
-	sleep(2);
+	sleep(1);
 	if (piecepose != 4)
 	{
 //		ft_print_result(soluce);
 //		printf("piece -> %d\n", piecepose);
 //		sleep(2);
-		return (0);
+		return (NULL);
 	}
 	else
 //		ft_print_result(soluce);
 //	sleep(1);
-	return 1;
+	return soluce;
 }
 
 int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 {
-	if (pose_piece(tetri, *soluce, pos, size) == 1)
+	if (pose_piece(tetri, *soluce, pos, size) != NULL)
 	{
+		*soluce = pose_piece(tetri, *soluce, pos, size);
 		if (tetri->next)
 			test_piece(pos, tetri->next, soluce, size);
 		else
@@ -219,7 +221,7 @@ char	**ft_resolve(t_tetriminos *tetri)
 
 	pos.x = 0;
 	pos.y = 0;
-	sizemap = 3;
+	sizemap = 3; // mettre a 2
 	if (!tetri)
 		return (NULL);
 	while (find_soluce(sizemap, &tetri, tetri, pos) == NULL)
@@ -236,6 +238,9 @@ int main()
 
 	tetri1 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
 	tetri2 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
+	tetri3 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
+	tetri4 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
+/* test 1
 	tetri1->bc[0].x = 0;
 	tetri1->bc[1].x = 1;
 	tetri1->bc[2].x = 2;
@@ -253,9 +258,51 @@ int main()
 	tetri2->bc[1].y = 0;
 	tetri2->bc[2].y = 1;
 	tetri2->bc[3].y = 1;
+*/
+
+/* test2 */
+	tetri1->bc[0].x = 0;
+	tetri1->bc[1].x = 1;
+	tetri1->bc[2].x = 2;
+	tetri1->bc[3].x = 3;
+	tetri1->bc[0].y = 0;
+	tetri1->bc[1].y = 0;
+	tetri1->bc[2].y = 0;
+	tetri1->bc[3].y = 0;
+
+	tetri2->bc[0].x = 0;
+	tetri2->bc[1].x = 1;
+	tetri2->bc[2].x = 2;
+	tetri2->bc[3].x = 3;
+	tetri2->bc[0].y = 0;
+	tetri2->bc[1].y = 0;
+	tetri2->bc[2].y = 0;
+	tetri2->bc[3].y = 0;
+
+	tetri3->bc[0].x = 0;
+	tetri3->bc[1].x = 1;
+	tetri3->bc[2].x = 2;
+	tetri3->bc[3].x = 3;
+	tetri3->bc[0].y = 0;
+	tetri3->bc[1].y = 0;
+	tetri3->bc[2].y = 0;
+	tetri3->bc[3].y = 0;
+
+	tetri4->bc[0].x = 0;
+	tetri4->bc[1].x = 1;
+	tetri4->bc[2].x = 2;
+	tetri4->bc[3].x = 3;
+	tetri4->bc[0].y = 0;
+	tetri4->bc[1].y = 0;
+	tetri4->bc[2].y = 0;
+	tetri4->bc[3].y = 0;
+
+
 
 	tetri1->id = 'A';
 	tetri2->id = 'B';
+	tetri2->id = 'C';
+	tetri2->id = 'D';
 
 	tetri1->next = tetri2;
 	tetri2->next = NULL;
