@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/27 13:48:59 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/27 12:18:36 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,28 +119,20 @@ int		pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 			countPiece = 0;
 			while (countPiece < 4)
 			{
-				printf("\nLa piece %c, partie %d de coordonnes x:%d et y:%d est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, tetri->bc[countPiece].y, pos.x, pos.y);
 				if (tetri->id == 'B')
 				{
 //					printf("\nLa piece %c, partie %d de coordonnes x:%d et y:%d est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, countPiece, tetri->bc[countPiece].x, tetri->bc[countPiece].y, pos.x, pos.y);
 //					sleep(1);
 				}
-				if (soluce[pos.x][pos.y] && soluce[pos.x][pos.y] == '0' && tetri->bc[countPiece].x == posTetri.x - posBase.x && tetri->bc[countPiece].y == posTetri.y - posBase.y)
-				{
-					//					if (tetri->id == 'B')
-					printf("La piece %c, parti %d, est pose car (tetri->bc[countPiece].x) = %d donc egale a posTetri.x - posBase.x= %d - %d. (POur info pos.x = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, posTetri.x, posBase.x, pos.x);
-					printf("La piece %c, parti %d, est pose car (tetri->bc[countPiece].y) = %d donc egale a posTetri.y - posBase.y= %d - %d. (POur info pos.y = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].y, posTetri.y, posBase.y, pos.y);
-					printf("piece pose++");
-					soluce[pos.x][pos.y] = tetri->id;
-					piecepose++;
-				}
-				else
-				{
-					printf("La piece %c, parti %d, nes pas pose car tetri->bc[countPiece].x= %d donc pas egale a posTetri.x - posBase.x = %d - %d. (POur info pos.x = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].x, posBase.x, posTetri.x, pos.x);
-					printf("La piece %c, parti %d, nes pas pose car tetri->bc[countPiece].y= %d donc pas egale a posTetri.y - posBase.y = %d - %d. (POur info pos.y = %d)\n", tetri->id, countPiece+1, tetri->bc[countPiece].y, posBase.y, posTetri.y, pos.y);
-				}
-				countPiece++;
-			}
+				if (soluce[pos.x][pos.y] && soluce[pos.x][pos.y] == '0' && tetri->bc[countPiece].x == posTetri.y && tetri->bc[countPiece].y == posTetri.x)
+					{
+						//					if (tetri->id == 'B')
+						//printf("piece pose++");
+						soluce[pos.x][pos.y] = tetri->id;
+						piecepose++;
+					}
+					countPiece++;
+			}3
 			pos.y++;
 			posTetri.y++;
 		}
@@ -149,18 +141,16 @@ int		pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 		pos.x++;
 		posTetri.x++;
 	}
-	ft_print_result(soluce);
-	printf("piece -> %d\n", piecepose);
-	sleep(2);
+//	sleep(3);
 	if (piecepose != 4)
 	{
-//		ft_print_result(soluce);
-//		printf("piece -> %d\n", piecepose);
-//		sleep(2);
+		ft_print_result(soluce);
+		printf("piece -> %d\n", piecepose);
+		sleep(2);
 		return (0);
 	}
 	else
-//		ft_print_result(soluce);
+		ft_print_result(soluce);
 //	sleep(1);
 	return 1;
 }
@@ -237,13 +227,13 @@ int main()
 	tetri1 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
 	tetri2 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
 	tetri1->bc[0].x = 0;
-	tetri1->bc[1].x = 1;
-	tetri1->bc[2].x = 2;
-	tetri1->bc[3].x = 3;
+	tetri1->bc[1].x = 0;
+	tetri1->bc[2].x = 0;
+	tetri1->bc[3].x = 0;
 	tetri1->bc[0].y = 0;
-	tetri1->bc[1].y = 0;
-	tetri1->bc[2].y = 0;
-	tetri1->bc[3].y = 0;
+	tetri1->bc[1].y = 1;
+	tetri1->bc[2].y = 2;
+	tetri1->bc[3].y = 3;
 
 	tetri2->bc[0].x = 0;
 	tetri2->bc[1].x = 1;
