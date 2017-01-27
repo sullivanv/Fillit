@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/27 15:36:12 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/27 15:52:49 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,10 @@ int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 	{
 		*soluce = pose_piece(tetri, *soluce, pos, size);
 		if (tetri->next)
+		{
+			printf("la prochaine piece est %c", tetri->next->id);
 			test_piece(pos, tetri->next, soluce, size);
+		}
 		else
 		{
 			ft_print_result(*soluce);
@@ -221,7 +224,7 @@ char	**ft_resolve(t_tetriminos *tetri)
 
 	pos.x = 0;
 	pos.y = 0;
-	sizemap = 3; // mettre a 2
+	sizemap = 4; // mettre a 2
 	if (!tetri)
 		return (NULL);
 	while (find_soluce(sizemap, &tetri, tetri, pos) == NULL)
@@ -235,6 +238,8 @@ int main()
 {
 	t_tetriminos	*tetri1;
 	t_tetriminos	*tetri2;
+	t_tetriminos	*tetri3;
+	t_tetriminos	*tetri4;
 
 	tetri1 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
 	tetri2 = (t_tetriminos*)malloc(sizeof(t_tetriminos));
@@ -262,50 +267,52 @@ int main()
 
 /* test2 */
 	tetri1->bc[0].x = 0;
-	tetri1->bc[1].x = 1;
-	tetri1->bc[2].x = 2;
-	tetri1->bc[3].x = 3;
+	tetri1->bc[1].x = 0;
+	tetri1->bc[2].x = 1;
+	tetri1->bc[3].x = 2;
 	tetri1->bc[0].y = 0;
-	tetri1->bc[1].y = 0;
-	tetri1->bc[2].y = 0;
-	tetri1->bc[3].y = 0;
+	tetri1->bc[1].y = 1;
+	tetri1->bc[2].y = 1;
+	tetri1->bc[3].y = 1;
 
 	tetri2->bc[0].x = 0;
-	tetri2->bc[1].x = 1;
-	tetri2->bc[2].x = 2;
-	tetri2->bc[3].x = 3;
+	tetri2->bc[1].x = 0;
+	tetri2->bc[2].x = 0;
+	tetri2->bc[3].x = 0;
 	tetri2->bc[0].y = 0;
-	tetri2->bc[1].y = 0;
-	tetri2->bc[2].y = 0;
-	tetri2->bc[3].y = 0;
+	tetri2->bc[1].y = 1;
+	tetri2->bc[2].y = 2;
+	tetri2->bc[3].y = 3;
 
 	tetri3->bc[0].x = 0;
 	tetri3->bc[1].x = 1;
-	tetri3->bc[2].x = 2;
-	tetri3->bc[3].x = 3;
+	tetri3->bc[2].x = 1;
+	tetri3->bc[3].x = 1;
 	tetri3->bc[0].y = 0;
 	tetri3->bc[1].y = 0;
-	tetri3->bc[2].y = 0;
-	tetri3->bc[3].y = 0;
+	tetri3->bc[2].y = 1;
+	tetri3->bc[3].y = 2;
 
 	tetri4->bc[0].x = 0;
-	tetri4->bc[1].x = 1;
-	tetri4->bc[2].x = 2;
-	tetri4->bc[3].x = 3;
+	tetri4->bc[1].x = 0;
+	tetri4->bc[2].x = 1;
+	tetri4->bc[3].x = 1;
 	tetri4->bc[0].y = 0;
-	tetri4->bc[1].y = 0;
-	tetri4->bc[2].y = 0;
-	tetri4->bc[3].y = 0;
+	tetri4->bc[1].y = 1;
+	tetri4->bc[2].y = 1;
+	tetri4->bc[3].y = 2;
 
 
 
 	tetri1->id = 'A';
 	tetri2->id = 'B';
-	tetri2->id = 'C';
-	tetri2->id = 'D';
+	tetri3->id = 'C';
+	tetri4->id = 'D';
 
 	tetri1->next = tetri2;
-	tetri2->next = NULL;
+	tetri2->next = tetri3;
+	tetri3->next = tetri4;
+	tetri4->next = NULL;
 
 	ft_resolve(tetri1);
 	return (0);
