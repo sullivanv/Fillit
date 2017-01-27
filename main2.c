@@ -6,12 +6,11 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/27 16:52:26 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/27 17:01:08 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
 
 /* print function */
 
@@ -92,6 +91,8 @@ char **ft_copy_tab(char **solucebase, int size)
 	return soluce;
 }
 
+/* remove old piece */
+
 char **removepiece(char **soluce, t_tetriminos *tetri)
 {
 	int i;
@@ -116,9 +117,9 @@ char **removepiece(char **soluce, t_tetriminos *tetri)
 
 /* Algo */
 
+/* check si je peux poser la piece tetri sur soluce a l'endroit pos */
 char		**pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 {
-	// TODO : check si je peux poser la piece tetri sur soluce a l'endroit pos
 	int nbpos;
 	t_coord posBase;
 	t_coord posTetri;
@@ -188,6 +189,8 @@ char		**pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 	return soluce;
 }
 
+
+/* backtracking */
 int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 {
 	t_coord newpos;
@@ -227,7 +230,7 @@ int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 	return (0);
 }
 
-
+/* malloc, algo puis free */
 char	**find_soluce(int size, t_tetriminos **begin, t_tetriminos *tetri, t_coord pos)
 {
 	char	**soluce;
@@ -242,6 +245,7 @@ char	**find_soluce(int size, t_tetriminos **begin, t_tetriminos *tetri, t_coord 
 	}
 }
 
+/* test pour chaque taille de map en commencant par 2 */
 char	**ft_resolve(t_tetriminos *tetri)
 {
 	int sizemap;
@@ -249,7 +253,7 @@ char	**ft_resolve(t_tetriminos *tetri)
 
 	pos.x = 0;
 	pos.y = 0;
-	sizemap = 2; // mettre a 2
+	sizemap = 2;
 	if (!tetri)
 		return (NULL);
 	while (find_soluce(sizemap, &tetri, tetri, pos) == NULL)
@@ -258,7 +262,6 @@ char	**ft_resolve(t_tetriminos *tetri)
 }
 
 /* todo : link and remove */
-
 int main()
 {
 	t_tetriminos	*tetri1;
@@ -342,56 +345,3 @@ int main()
 	ft_resolve(tetri1);
 	return (0);
 }
-
-
-
-
-/*
-char **find_soluce(int size, t_tetriminos **begin, t_tetriminos *tetri, t_coord pos[2])
-{
-	char	**soluce;
-
-	soluce = malloc_soluce(size);
-	pos[0] = pos[1];
-	tetri = *begin;
-	while (tetri)
-	{
-		if (pose_piece(tetri, soluce, pos[0]) == 1)
-		{
-			tetri = tetri->next;
-			pos[0].x = 0;
-			pos[0].y = 0;
-////////////// ???????????????
-			pos[1].x = 0;
-			pos[1].y = 0;
-////////////// ???????????????
-		}
-		// TODO : A TESTER
-		else
-		{
-			if (pos[0].x + 1 == size)
-			{
-				pos[0].x = 0;
-				pos[0].y++;
-			}
-			else
-				pos[0].x++;
-			if (pos[0].y + 1 == size && pos[0].x + 1 == size)
-			{
-				free_soluce(&soluce, size);
-				if (pos[1].x + 1 == size)
-				{
-					pos[1].x = 0;
-					pos[1].y++;
-				}
-				else
-					pos[1].x++;
-				if (pos[1].y + 1 == size && pos[1].x + 1 == size)
-					return (NULL);
-				find_soluce(size, begin, tetri, pos);
-			}
-		}
-	}
-	return (soluce);
-}
-*/
