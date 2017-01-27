@@ -6,7 +6,7 @@
 /*   By: suvitiel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 18:00:57 by suvitiel          #+#    #+#             */
-/*   Updated: 2017/01/27 15:52:49 by suvitiel         ###   ########.fr       */
+/*   Updated: 2017/01/27 16:34:33 by suvitiel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,27 @@ char **ft_copy_tab(char **solucebase, int size)
 	return soluce;
 }
 
+char **removepiece(char **soluce, t_tetriminos *tetri)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (soluce[i])
+	{
+		j = 0;
+		while (soluce[i][j])
+		{
+			if (soluce[i][j] >= tetri->id)
+				soluce[i][j] = '0';
+			j++;
+		}
+		i++;
+	}
+	return soluce;
+}
+
 
 /* Algo */
 
@@ -113,6 +134,7 @@ char		**pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 	pos = posTetri;
 //	ft_print_result(soluce);
 //	printf("\nLa piece %c, est teste dans soluce a la position x:%d et y:%d.\n", tetri->id, pos.x, pos.y);
+	soluce = removepiece(soluce, tetri);
 	while (pos.x < posBase.x + 4 && pos.x < size)
 	{
 		while (pos.y < posBase.y + 4 && pos.y < size)
@@ -152,7 +174,7 @@ char		**pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 	}
 	ft_print_result(soluce);
 	printf("piece -> %d\n", piecepose);
-	sleep(1);
+//	sleep(1);
 	if (piecepose != 4)
 	{
 //		ft_print_result(soluce);
@@ -168,13 +190,16 @@ char		**pose_piece(t_tetriminos *tetri, char **soluce1, t_coord pos, int size)
 
 int	test_piece(t_coord pos, t_tetriminos *tetri, char ***soluce, int size)
 {
+	t_coord newpos;
 	if (pose_piece(tetri, *soluce, pos, size) != NULL)
 	{
 		*soluce = pose_piece(tetri, *soluce, pos, size);
 		if (tetri->next)
 		{
-			printf("la prochaine piece est %c", tetri->next->id);
-			test_piece(pos, tetri->next, soluce, size);
+			printf("la prochaine piece a test est %c\n", tetri->next->id);
+			newpos.x = 0;
+			newpos.y = 0;
+			test_piece(newpos, tetri->next, soluce, size);
 		}
 		else
 		{
