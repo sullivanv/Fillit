@@ -1,1 +1,1 @@
-Fillit (projet finit) + libft
+# 42 project - Fillit
